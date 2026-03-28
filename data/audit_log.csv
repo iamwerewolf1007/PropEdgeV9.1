@@ -1,21 +1,8 @@
 timestamp,batch,operation,file,rows_before,rows_after,rows_added,rows_removed,detail,status
-2026-03-28 19:46:20,B2,BATCH_START,,0,0,0,0,2026-03-28,OK
-2026-03-28 19:46:25,B2,PROPS_FETCHED,,0,0,0,0,"69 props, 6 games",OK
-2026-03-28 19:46:34,B2,PREDICTIONS,,0,0,0,0,"55 plays, skipped 14: {'low_line': 0, 'no_player': 5, 'few_games': 0, 'no_L30': 0, 'few_recent': 0, 'no_play': 9}",OK
-2026-03-28 19:46:35,B2,BATCH_SUMMARY,,0,0,0,0,"fetched=55, added=55, graded=0, W=0, L=0, DNP=0",OK
-2026-03-28 19:46:35,B2,SAVE_TODAY,today.json,0,55,55,0,,OK
-2026-03-28 19:46:36,B2,BATCH_COMPLETE,,0,0,0,0,,OK
-2026-03-28 19:55:20,B2,BATCH_START,,0,0,0,0,2026-03-28,OK
-2026-03-28 19:55:24,B2,PROPS_FETCHED,,0,0,0,0,"71 props, 6 games",OK
-2026-03-28 19:55:34,B2,PREDICTIONS,,0,0,0,0,"62 plays, skipped 9: {'low_line': 0, 'no_player': 0, 'few_games': 0, 'no_L30': 0, 'few_recent': 0, 'no_play': 9}",OK
-2026-03-28 19:57:18,B2,BATCH_START,,0,0,0,0,2026-03-28,OK
-2026-03-28 19:57:23,B2,PROPS_FETCHED,,0,0,0,0,"71 props, 6 games",OK
-2026-03-28 19:57:33,B2,PREDICTIONS,,0,0,0,0,"62 plays, skipped 9: {'low_line': 0, 'no_player': 0, 'few_games': 0, 'no_L30': 0, 'few_recent': 0, 'no_play': 9}",OK
-2026-03-28 19:57:33,B2,BATCH_SUMMARY,,0,0,0,0,"fetched=62, added=7, graded=0, W=0, L=0, DNP=0",OK
-2026-03-28 19:57:33,B2,SAVE_TODAY,today.json,55,62,7,0,,OK
-2026-03-28 19:57:35,B2,BATCH_COMPLETE,,0,0,0,0,,OK
-2026-03-28 20:03:21,B2,BATCH_START,,0,0,0,0,2026-03-28,OK
-2026-03-28 20:03:27,B2,PROPS_FETCHED,,0,0,0,0,"71 props, 6 games",OK
-2026-03-28 20:03:38,B2,PREDICTIONS,,0,0,0,0,"71 plays, skipped 0: {'low_line': 0, 'no_player': 0, 'few_games': 0, 'no_L30': 0, 'few_recent': 0}",OK
-2026-03-28 20:03:38,B2,BATCH_SUMMARY,,0,0,0,0,"fetched=71, added=9, graded=0, W=0, L=0, DNP=0",OK
-2026-03-28 20:03:38,B2,SAVE_TODAY,today.json,62,71,9,0,,OK
+2026-03-28 20:15:27,GEN,SEASON_2425_GENERATED,season_2024_25.json,0,10177,0,0,,OK
+2026-03-28 20:17:58,GEN,SEASON_2526_GENERATED,season_2025_26.json,0,13429,0,0,,OK
+2026-03-28 20:17:59,B2,BATCH_START,,0,0,0,0,2026-03-28,OK
+2026-03-28 20:18:04,B2,PROPS_FETCHED,,0,0,0,0,"71 props, 6 games",OK
+2026-03-28 20:18:16,B2,PREDICTIONS,,0,0,0,0,"71 plays, skipped 0: {'low_line': 0, 'no_player': 0, 'few_games': 0, 'no_L30': 0, 'few_recent': 0}",OK
+2026-03-28 20:18:16,B2,BATCH_SUMMARY,,0,0,0,0,"fetched=71, added=71, graded=0, W=0, L=0, DNP=0",OK
+2026-03-28 20:18:16,B2,SAVE_TODAY,today.json,0,71,71,0,,OK

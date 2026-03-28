@@ -159,11 +159,19 @@ def run_model_on_props(props_df, game_logs, h2h_df, model, player_trust, season_
             tw=sum(W.values()); ws=sum(W[k]*s[k] for k in s)
         composite=ws/tw
 
+        # Direction: strong conviction or lean
         if pred_pts is not None:
-            direction='OVER' if pred_pts>line+0.3 else 'UNDER' if pred_pts<line-0.3 else 'NO PLAY'
+            if pred_pts > line + 0.3: direction='OVER'; is_lean=False
+            elif pred_pts < line - 0.3: direction='UNDER'; is_lean=False
+            else:
+                raw_dir = 'OVER' if pred_pts > line else 'UNDER'
+                direction=f'LEAN {raw_dir}'; is_lean=True
         else:
-            direction='OVER' if composite>0.05 else 'UNDER' if composite<-0.05 else 'NO PLAY'
-        if direction=='NO PLAY': continue
+            if composite > 0.05: direction='OVER'; is_lean=False
+            elif composite < -0.05: direction='UNDER'; is_lean=False
+            else:
+                raw_dir = 'OVER' if composite > 0 else 'UNDER'
+                direction=f'LEAN {raw_dir}'; is_lean=True
 
         sig_conf=float(np.clip(0.5+abs(composite)*0.3,0.50,0.85))
         if std10>8: sig_conf-=0.03
@@ -171,7 +179,7 @@ def run_model_on_props(props_df, game_logs, h2h_df, model, player_trust, season_
         proj_conf=float(np.clip(0.5+pred_gap*0.04,0.45,0.90)) if pred_pts else sig_conf
         conf=0.4*sig_conf+0.6*proj_conf
 
-        is_over=direction!='UNDER'
+        is_over='UNDER' not in direction
         flags=0; flag_details=[]
         for nm,ag,dt in [
             ('Volume',(is_over and vol>0) or (not is_over and vol<0),f"{vol:+.1f}"),
@@ -194,11 +202,13 @@ def run_model_on_props(props_df, game_logs, h2h_df, model, player_trust, season_
         # H2H TS alignment
         h2h_aligned=True
         if h2h_ts_dev!=0:
-            if direction=='OVER' and h2h_ts_dev<-3: h2h_aligned=False
-            elif direction=='UNDER' and h2h_ts_dev>3: h2h_aligned=False
+            if 'OVER' in direction and h2h_ts_dev<-3: h2h_aligned=False
+            elif 'UNDER' in direction and h2h_ts_dev>3: h2h_aligned=False
 
-        # Tier
-        if conf>=0.70 and flags>=8 and std10<=6 and h2h_aligned: tier=1; tl='T1_ULTRA'
+        # Tier — LEANs are always T3_LEAN
+        if is_lean:
+            tier=3; tl='T3_LEAN'
+        elif conf>=0.70 and flags>=8 and std10<=6 and h2h_aligned: tier=1; tl='T1_ULTRA'
         elif conf>=0.65 and flags>=7 and std10<=7 and h2h_aligned: tier=1; tl='T1_PREMIUM'
         elif conf>=0.62 and flags>=7 and std10<=7 and h2h_aligned: tier=1; tl='T1'
         elif conf>=0.55 and flags>=6 and std10<=8 and h2h_aligned: tier=2; tl='T2'
@@ -215,7 +225,12 @@ def run_model_on_props(props_df, game_logs, h2h_df, model, player_trust, season_
             actual = int(prop['Actual_PTS'])
         if actual is not None and not (isinstance(actual,float) and np.isnan(actual)):
             actual=int(actual)
-            result='WIN' if (direction=='OVER' and actual>line) or (direction=='UNDER' and actual<line) else 'LOSS'
+            if 'OVER' in direction:
+                result='WIN' if actual>line else 'LOSS'
+            elif 'UNDER' in direction:
+                result='WIN' if actual<line else 'LOSS'
+            else:
+                result='NO PLAY'
             delta=round(actual-line,1)
         else:
             actual=None; result=None; delta=None

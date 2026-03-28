@@ -206,9 +206,10 @@ def grade_plays(date_str, new_rows):
             lkp=results_map.get((p['player'],date_str))
             if lkp is None: p['result']='DNP';p['actualPts']=None;dnp+=1;changed=True;continue
             actual=int(lkp); p['actualPts']=actual; p['delta']=round(actual-p['line'],1)
-            if p['dir']=='OVER': p['result']='WIN' if actual>p['line'] else 'LOSS'
-            elif p['dir']=='UNDER': p['result']='WIN' if actual<p['line'] else 'LOSS'
-            else: p['result']='NO PLAY'
+            d = p.get('dir','')
+            if 'OVER' in d: p['result']='WIN' if actual>p['line'] else 'LOSS'
+            elif 'UNDER' in d: p['result']='WIN' if actual<p['line'] else 'LOSS'
+            else: p['result']='DNP'; dnp+=1; changed=True; continue
             if p['result']=='WIN': wins+=1
             elif p['result']=='LOSS': losses+=1
             graded_count+=1; changed=True
