@@ -283,13 +283,15 @@ function computeSeasonStats() {
 }
 
 // ─── SPARKLINE ───
+// recent array: index 0 = oldest, last = most recent
+// Chart: LEFT = oldest, RIGHT = most recent (natural timeline)
 function spark(d, ln, homes, w = 150, h = 30) {
   if (!d || d.length < 2) return '';
-  const p = 4, mn = Math.min(...d, ln) - 3, mx = Math.max(...d, ln) + 3, rn = mx - mn || 1;
-  const x = i => p + ((d.length - 1 - i) / (d.length - 1)) * (w - p * 2);
-  const y = v => p + (1 - (v - mn) / rn) * (h - p * 2);
+  const pad = 4, mn = Math.min(...d, ln) - 3, mx = Math.max(...d, ln) + 3, rn = mx - mn || 1;
+  const x = i => pad + (i / (d.length - 1)) * (w - pad * 2);
+  const y = v => pad + (1 - (v - mn) / rn) * (h - pad * 2);
   return `<svg width="${w}" height="${h}" style="display:block">
-    <line x1="${p}" y1="${y(ln)}" x2="${w - p}" y2="${y(ln)}" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3" opacity=".7"/>
+    <line x1="${pad}" y1="${y(ln)}" x2="${w - pad}" y2="${y(ln)}" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3" opacity=".7"/>
     <polyline points="${d.map((v, i) => x(i) + ',' + y(v)).join(' ')}" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
     ${d.map((v, i) => {
       const isHome = homes && i < homes.length ? homes[i] : null;
@@ -652,8 +654,12 @@ function card(p) {
   </div>`;
 
   // ── Recent 20 scores with home/away dots ──
-  const sc = (p.recent20 || p.recent10 || p.recent || []).slice(0, 20);
-  const scH = p.recent20homes || p.recent10homes || [];
+  // recent array: index 0 = oldest, last = most recent
+  // Display: most recent first (left), so reverse both scores and homes
+  const scRaw = (p.recent20 || p.recent10 || p.recent || []).slice(0, 20);
+  const scHRaw = p.recent20homes || p.recent10homes || [];
+  const sc = [...scRaw].reverse();
+  const scH = [...scHRaw].reverse();
   if (sc.length) {
     const tags = sc.map((v, i) => {
       const venue = i < scH.length ? (scH[i] === true ? '🏠' : '✈️') : '';
@@ -665,7 +671,9 @@ function card(p) {
       </div>`;
     }).join('');
     h += `<div style="display:flex;gap:4px;margin-top:5px;align-items:flex-end;flex-wrap:wrap">
+      <span style="font:400 6px var(--M);color:var(--tx4);align-self:flex-end;margin-right:-2px">NEW</span>
       ${tags}
+      <span style="font:400 6px var(--M);color:var(--tx4);align-self:flex-end;margin-left:-2px">OLD</span>
       <span style="font:400 8px var(--M);color:var(--tx3);margin-left:3px;align-self:flex-end">${p.recentOver || 0}↑ ${p.recentUnder ?? 0}↓</span>
     </div>`;
   }
