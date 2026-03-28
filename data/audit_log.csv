@@ -1,0 +1,6 @@
+timestamp,batch,operation,file,rows_before,rows_after,rows_added,rows_removed,detail,status
+2026-03-28 19:35:31,B2,BATCH_START,,0,0,0,0,2026-03-28,OK
+2026-03-28 19:35:35,B2,PROPS_FETCHED,,0,0,0,0,"67 props, 6 games",OK
+2026-03-28 19:35:44,B2,PREDICTIONS,,0,0,0,0,53 plays,OK
+2026-03-28 19:35:45,B2,BATCH_SUMMARY,,0,0,0,0,"fetched=53, added=53, graded=0, W=0, L=0, DNP=0",OK
+2026-03-28 19:35:45,B2,SAVE_TODAY,today.json,0,53,53,0,,OK
