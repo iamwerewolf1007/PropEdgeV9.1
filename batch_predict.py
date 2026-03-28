@@ -161,7 +161,7 @@ def run_predictions(games,date_str):
     elp={(p['player'],p.get('match','')):(i,p) for i,p in enumerate(existing) if p['date']==date_str}
 
     batch_ts=now_uk().strftime('%H:%M')
-    plays=[];skip_reasons={'low_line':0,'no_player':0,'few_games':0,'no_L30':0,'few_recent':0,'no_play':0}
+    plays=[];skip_reasons={'low_line':0,'no_player':0,'few_games':0,'no_L30':0,'few_recent':0}
 
     for eid,g in games.items():
         ht=g['home'];at=g['away'];ms=f"{at} @ {ht}"
@@ -238,8 +238,16 @@ def run_predictions(games,date_str):
             else: tw=sum(W.values());ws=sum(W[k]*S[k] for k in S)
             comp=ws/tw
 
-            dr='OVER' if (pp and pp>line+0.3) or (not pp and comp>0.05) else 'UNDER' if (pp and pp<line-0.3) or (not pp and comp<-0.05) else 'NO PLAY'
-            if dr=='NO PLAY': skip_reasons['no_play']+=1;continue
+            # Direction: strong conviction or lean
+            if (pp and pp>line+0.3) or (not pp and comp>0.05):
+                dr='OVER'; is_lean=False
+            elif (pp and pp<line-0.3) or (not pp and comp<-0.05):
+                dr='UNDER'; is_lean=False
+            else:
+                # Low conviction — assign lean direction based on raw composite
+                raw_dir = 'OVER' if comp > 0 else 'UNDER' if comp < 0 else ('OVER' if (pp and pp > line) else 'UNDER')
+                dr = f'LEAN {raw_dir}'
+                is_lean=True
 
             sc=float(np.clip(0.5+abs(comp)*0.3,0.50,0.85))
             if s10>8: sc-=0.03
@@ -247,7 +255,8 @@ def run_predictions(games,date_str):
             pc=float(np.clip(0.5+pg*0.04,0.45,0.90)) if pp else sc
             conf=0.4*sc+0.6*pc
 
-            io=dr!='UNDER'
+            # For signal flags, use the actual lean direction
+            io = 'UNDER' not in dr  # True for OVER and LEAN OVER
             fl=0;fds=[]
             for nm,ag,dt in [
                 ('Volume',(io and vol>0) or (not io and vol<0),f"{vol:+.1f}"),
@@ -265,10 +274,13 @@ def run_predictions(games,date_str):
 
             ha=True
             if hTS!=0:
-                if dr=='OVER' and hTS<-3: ha=False
-                elif dr=='UNDER' and hTS>3: ha=False
+                if 'OVER' in dr and hTS<-3: ha=False
+                elif 'UNDER' in dr and hTS>3: ha=False
 
-            if conf>=0.70 and fl>=8 and s10<=6 and ha: tier=1;tl='T1_ULTRA'
+            # Tier assignment — LEANs are always T3 (no conviction for higher tiers)
+            if is_lean:
+                tier=3;tl='T3_LEAN'
+            elif conf>=0.70 and fl>=8 and s10<=6 and ha: tier=1;tl='T1_ULTRA'
             elif conf>=0.65 and fl>=7 and s10<=7 and ha: tier=1;tl='T1_PREMIUM'
             elif conf>=0.62 and fl>=7 and s10<=7 and ha: tier=1;tl='T1'
             elif conf>=0.55 and fl>=6 and s10<=8 and ha: tier=2;tl='T2'
@@ -330,7 +342,8 @@ def run_predictions(games,date_str):
             plays.append(play)
 
     total_skipped = sum(skip_reasons.values())
-    print(f"  {len(plays)} predictions (skipped {total_skipped})")
+    leans = sum(1 for p in plays if 'LEAN' in p.get('dir',''))
+    print(f"  {len(plays)} predictions ({len(plays)-leans} conviction + {leans} leans, skipped {total_skipped})")
     if total_skipped > 0:
         parts = [f"{v} {k}" for k,v in skip_reasons.items() if v > 0]
         print(f"    Skip breakdown: {', '.join(parts)}")
