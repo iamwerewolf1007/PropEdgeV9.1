@@ -30,18 +30,24 @@ def git_push(repo, message):
     """Git add, commit, push via SSH. Non-blocking — won't hang on credential prompts."""
     env = {**__import__('os').environ, 'GIT_SSH_COMMAND': 'ssh -o BatchMode=yes -o StrictHostKeyChecking=no'}
     try:
-        r1 = subprocess.run(['git','add','-A'], cwd=repo, capture_output=True, timeout=30, env=env)
+        subprocess.run(['git','add','-A'], cwd=repo, capture_output=True, timeout=30, env=env)
         r2 = subprocess.run(['git','commit','-m',message], cwd=repo, capture_output=True, timeout=30, env=env)
         if r2.returncode != 0:
-            msg = r2.stderr.decode().strip()
+            msg = r2.stderr.decode().strip() if r2.stderr else ''
             if 'nothing to commit' in msg:
                 print(f"  ✓ Git: nothing to commit")
                 return
+        # Try regular push first, fall back to --set-upstream
         r3 = subprocess.run(['git','push'], cwd=repo, capture_output=True, timeout=60, env=env)
+        if r3.returncode != 0:
+            err = r3.stderr.decode().strip() if r3.stderr else ''
+            if 'no upstream' in err or 'set-upstream' in err:
+                r3 = subprocess.run(['git','push','--set-upstream','origin','main'],
+                                    cwd=repo, capture_output=True, timeout=60, env=env)
         if r3.returncode == 0:
             print(f"  ✓ Git push: {message}")
         else:
-            err = r3.stderr.decode().strip()
+            err = r3.stderr.decode().strip() if r3.stderr else 'unknown error'
             print(f"  ⚠ Git push failed: {err[:200]}")
     except subprocess.TimeoutExpired:
         print(f"  ⚠ Git push timed out (60s) — check SSH setup")

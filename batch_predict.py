@@ -121,7 +121,7 @@ def run_predictions(games,date_str):
     elp={(p['player'],p.get('match','')):(i,p) for i,p in enumerate(existing) if p['date']==date_str}
 
     batch_ts=now_uk().strftime('%H:%M')
-    plays=[];skip=0
+    plays=[];skip_reasons={'low_line':0,'no_player':0,'few_games':0,'no_L30':0,'few_recent':0,'no_play':0}
 
     for eid,g in games.items():
         ht=g['home'];at=g['away'];ms=f"{at} @ {ht}"
@@ -130,13 +130,13 @@ def run_predictions(games,date_str):
 
         for pname,pd_ in g['props'].items():
             line=pd_.get('line')
-            if not line or line<3: continue
-            if pname not in pidx: skip+=1;continue
+            if not line or line<3: skip_reasons['low_line']+=1;continue
+            if pname not in pidx: skip_reasons['no_player']+=1;continue
             ph=pidx[pname]; prior=ph[ph['GAME_DATE']<date_str]
-            if len(prior)<5: skip+=1;continue
+            if len(prior)<5: skip_reasons['few_games']+=1;continue
             sn=prior.iloc[-1]
             L30=sn.get('L30_PTS')
-            if pd.isna(L30): skip+=1;continue
+            if pd.isna(L30): skip_reasons['no_L30']+=1;continue
             L20=sn.get('L20_PTS',L30);L10=sn.get('L10_PTS',L30);L5=sn.get('L5_PTS',L30);L3=sn.get('L3_PTS',L30)
             for a in [L20,L10,L5,L3]:
                 if pd.isna(a): a=L30
@@ -144,7 +144,7 @@ def run_predictions(games,date_str):
             ta=sn.get('GAME_TEAM_ABBREVIATION','');ih=ta==ht;opp=at if ih else ht
             pos=POS_MAP.get(sn.get('PLAYER_POSITION',''),'Forward')
             rp=prior.tail(20)['PTS'].values
-            if len(rp)<5: skip+=1;continue
+            if len(rp)<5: skip_reasons['few_recent']+=1;continue
             r10=rp[-10:];r20=list(rp[-20:].astype(int))
             r20h=list(prior.tail(20)['IS_HOME'].values.astype(int))
 
@@ -198,7 +198,7 @@ def run_predictions(games,date_str):
             comp=ws/tw
 
             dr='OVER' if (pp and pp>line+0.3) or (not pp and comp>0.05) else 'UNDER' if (pp and pp<line-0.3) or (not pp and comp<-0.05) else 'NO PLAY'
-            if dr=='NO PLAY': continue
+            if dr=='NO PLAY': skip_reasons['no_play']+=1;continue
 
             sc=float(np.clip(0.5+abs(comp)*0.3,0.50,0.85))
             if s10>8: sc-=0.03
@@ -288,8 +288,12 @@ def run_predictions(games,date_str):
             }
             plays.append(play)
 
-    print(f"  {len(plays)} predictions (skipped {skip})")
-    log_event(f'B{BATCH}','PREDICTIONS',detail=f'{len(plays)} plays')
+    total_skipped = sum(skip_reasons.values())
+    print(f"  {len(plays)} predictions (skipped {total_skipped})")
+    if total_skipped > 0:
+        parts = [f"{v} {k}" for k,v in skip_reasons.items() if v > 0]
+        print(f"    Skip breakdown: {', '.join(parts)}")
+    log_event(f'B{BATCH}','PREDICTIONS',detail=f'{len(plays)} plays, skipped {total_skipped}: {skip_reasons}')
     return plays
 
 def save_today(plays,date_str):
