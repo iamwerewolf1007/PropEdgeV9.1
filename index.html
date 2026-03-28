@@ -289,12 +289,13 @@ function spark(d, ln, homes, w = 150, h = 30) {
   const x = i => p + ((d.length - 1 - i) / (d.length - 1)) * (w - p * 2);
   const y = v => p + (1 - (v - mn) / rn) * (h - p * 2);
   return `<svg width="${w}" height="${h}" style="display:block">
-    <line x1="${p}" y1="${y(ln)}" x2="${w - p}" y2="${y(ln)}" stroke="var(--yl)" stroke-width="1" stroke-dasharray="3,3" opacity=".4"/>
-    <polyline points="${d.map((v, i) => x(i) + ',' + y(v)).join(' ')}" fill="none" stroke="var(--bl)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="${p}" y1="${y(ln)}" x2="${w - p}" y2="${y(ln)}" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4,3" opacity=".7"/>
+    <polyline points="${d.map((v, i) => x(i) + ',' + y(v)).join(' ')}" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
     ${d.map((v, i) => {
       const isHome = homes && i < homes.length ? homes[i] : null;
-      const fill = isHome === true ? 'var(--bl)' : isHome === false ? 'var(--tx3)' : (v > ln ? 'var(--gr)' : 'var(--rd)');
-      return `<circle cx="${x(i)}" cy="${y(v)}" r="2.5" fill="${fill}" />`;
+      const fill = v > ln ? '#22c55e' : '#ef4444';
+      const stroke = isHome === true ? '#38bdf8' : isHome === false ? '#94a3b8' : 'none';
+      return `<circle cx="${x(i)}" cy="${y(v)}" r="3" fill="${fill}" ${stroke !== 'none' ? 'stroke="' + stroke + '" stroke-width="1.5"' : ''}/>`;
     }).join('')}
   </svg>`;
 }
@@ -621,9 +622,8 @@ function card(p) {
 
   // ── Stats + sparkline row ──
   const lhArr = p.lineHistory;
-  const lhMoved = lhArr && lhArr.length >= 2 && lhArr[0].line !== lhArr[lhArr.length - 1].line;
-  h += `<div style="display:flex;align-items:center;gap:8px;margin-top:7px">
-    ${[['Line', p.line, 'var(--tx)'], ['L10', p.l10, clr(p.l10, p.line)], ['L30', p.l30, clr(p.l30, p.line)]].map(([k, v, c]) => `<div class="kv"><div class="kv-l">${k}</div><div class="kv-v" style="color:${c}">${v ?? '—'}</div></div>`).join('')}
+  h += `<div style="display:flex;align-items:center;gap:7px;margin-top:7px">
+    ${[['Line', p.line, 'var(--tx)'], ['L3', p.l3, clr(p.l3, p.line)], ['L5', p.l5, clr(p.l5, p.line)], ['L10', p.l10, clr(p.l10, p.line)]].map(([k, v, c]) => `<div class="kv"><div class="kv-l">${k}</div><div class="kv-v" style="color:${c}">${v ?? '—'}</div></div>`).join('')}
     ${lhArr && lhArr.length >= 2 ? (() => {
       const first = lhArr[0].line, last = lhArr[lhArr.length - 1].line;
       if (first === last) return '';
@@ -761,9 +761,9 @@ function card(p) {
     if (p.std10) h += `<span>σ: ${p.std10}</span>`;
     h += `</div>`;
 
-    // Scoring averages
+    // Scoring averages — most recent first
     h += `<div class="sec">Scoring Averages</div><div class="g5">
-      ${['L30', 'L20', 'L10', 'L5', 'L3'].map(k => {
+      ${['L3', 'L5', 'L10', 'L20', 'L30'].map(k => {
         const v = p[k.toLowerCase()];
         return `<div class="kv"><div class="kv-l">${k}</div><div class="kv-v" style="color:${clr(v, p.line)};font-size:13px">${v ?? '—'}</div></div>`;
       }).join('')}
