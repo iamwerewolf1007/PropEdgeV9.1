@@ -106,6 +106,46 @@ def run_predictions(games,date_str):
     tfga=combined.groupby('OPPONENT')['FGA'].mean()
     pace={t:i+1 for i,(t,_) in enumerate(tfga.sort_values(ascending=False).items())}
 
+    # ── NAME RESOLVER: Odds API names → game log names ──
+    import unicodedata as _ud, re as _re
+    def _norm(n):
+        n=_ud.normalize('NFKD',str(n)).encode('ascii','ignore').decode()
+        n=n.replace('.','').replace("'",'').strip()
+        n=_re.sub(r'\s+', ' ', n)
+        n=_re.sub(r'\s+(Jr|Sr|II|III|IV|V)\s*$', '', n, flags=_re.IGNORECASE)
+        return n.lower().strip()
+
+    _name_map = {}  # normalized → original game log name
+    for orig in pidx.keys():
+        _name_map[_norm(orig)] = orig
+
+    _NICKNAMES = {'nic':'nicolas','nick':'nicolas','herb':'herbert','moe':'mohamed',
+                  'cam':'cameron','drew':'andrew','alex':'alexander','will':'william',
+                  'kenny':'kenyon','mo':'mohamed','greg':'gregory','matt':'matthew',
+                  'mike':'michael','chris':'christopher','jon':'jonathan','joe':'joseph',
+                  'ben':'benjamin','dan':'daniel','dave':'david','rob':'robert','bob':'robert',
+                  'ed':'edward','jeff':'jeffrey','jake':'jacob','tony':'anthony'}
+
+    def _resolve(odds_name):
+        """Resolve Odds API player name to game log name."""
+        if odds_name in pidx: return odds_name  # Exact match
+        n = _norm(odds_name)
+        if n in _name_map: return _name_map[n]  # Normalised match
+        # Try adding suffixes
+        for sfx in ['jr','sr','ii','iii','iv']:
+            if n+' '+sfx in _name_map: return _name_map[n+' '+sfx]
+        # Try nickname expansion
+        parts = odds_name.strip().split()
+        if len(parts) >= 2:
+            first_lower = parts[0].lower()
+            if first_lower in _NICKNAMES:
+                expanded = _NICKNAMES[first_lower] + ' ' + ' '.join(parts[1:])
+                en = _norm(expanded)
+                if en in _name_map: return _name_map[en]
+                for sfx in ['jr','sr','ii','iii','iv']:
+                    if en+' '+sfx in _name_map: return _name_map[en+' '+sfx]
+        return None  # Genuinely unknown player
+
     # B2B
     b2b={}
     for pn,g in combined.sort_values('GAME_DATE').groupby('PLAYER_NAME'):
@@ -128,10 +168,11 @@ def run_predictions(games,date_str):
         fms=f"{TEAM_FULL.get(at,at)} @ {TEAM_FULL.get(ht,ht)}"
         sv=g['spread'];tv=g['total'];blow=abs(sv)>=10 if sv else False
 
-        for pname,pd_ in g['props'].items():
+        for pname_raw,pd_ in g['props'].items():
             line=pd_.get('line')
             if not line or line<3: skip_reasons['low_line']+=1;continue
-            if pname not in pidx: skip_reasons['no_player']+=1;continue
+            pname = _resolve(pname_raw)
+            if pname is None: skip_reasons['no_player']+=1;continue
             ph=pidx[pname]; prior=ph[ph['GAME_DATE']<date_str]
             if len(prior)<5: skip_reasons['few_games']+=1;continue
             sn=prior.iloc[-1]
@@ -306,6 +347,7 @@ def save_today(plays,date_str):
     - Players from previous batch but NOT in current API fetch are KEPT (not dropped)
     - Dedup key: (player, match, date)
     """
+    batch_ts = now_uk().strftime('%H:%M')
     existing=[]
     if TODAY_JSON.exists():
         with open(TODAY_JSON) as f: existing=json.load(f)
