@@ -27,3 +27,10 @@ timestamp,batch,operation,file,rows_before,rows_after,rows_added,rows_removed,de
 2026-03-30 06:00:36,B0,APPEND_GAMELOGS,nba_gamelogs_2025_26.csv,23925,24130,205,0,,OK
 2026-03-30 06:00:37,B0,BATCH_SUMMARY,,0,0,0,0,"fetched=0, added=0, graded=92, W=46, L=46, DNP=15",OK
 2026-03-30 06:00:45,B0,CROSSCHECK_PASSED,,0,0,0,0,2026-03-29,OK
+2026-03-30 06:03:02,B0,BATCH_COMPLETE,,0,0,0,0,,OK
+2026-03-30 08:00:01,B1,BATCH_START,,0,0,0,0,2026-03-30,OK
+2026-03-30 08:00:10,B1,PROPS_FETCHED,,0,0,0,0,"103 props, 8 games",OK
+2026-03-30 08:00:23,B1,PREDICTIONS,,0,0,0,0,"101 plays, skipped 2: {'low_line': 0, 'no_player': 2, 'few_games': 0, 'no_L30': 0, 'few_recent': 0}",OK
+2026-03-30 08:00:23,B1,BATCH_SUMMARY,,0,0,0,0,"fetched=101, added=101, graded=0, W=0, L=0, DNP=0",OK
+2026-03-30 08:00:23,B1,SAVE_TODAY,today.json,107,208,101,0,,OK
+2026-03-30 08:00:23,B1,DAILY_EXCEL_SAVED,,0,0,0,0,/Users/salman/Documents/GitHub/PropEdgeV9.1/daily/2026-03-30.xlsx,OK
