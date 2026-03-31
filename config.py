@@ -24,7 +24,7 @@ SEASON_2526    = DATA_DIR / 'season_2025_26.json'
 AUDIT_LOG      = DATA_DIR / 'audit_log.csv'
 
 # ─── API ──────────────────────────────────────────────────────
-ODDS_API_KEY  = 'c0bab20a574208a41a6e0d930cdaf313'
+ODDS_API_KEY  = 'a77b14b513399a472139e58390aac514'
 ODDS_API_BASE = 'https://api.the-odds-api.com/v4'
 SPORT         = 'basketball_nba'
 CREDIT_ALERT  = 170

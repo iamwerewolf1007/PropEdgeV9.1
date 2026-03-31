@@ -34,3 +34,35 @@ PropEdge V9.1 — BATCH 2: PREDICT
     Added: 3 | Updated: 101 | Preserved: 3
   ✓ Daily Excel: 2026-03-29.xlsx (104 rows)
   ✓ Git push: B2: 2026-03-29 — 104 plays
+============================================================
+PropEdge V9.1 — BATCH 2: PREDICT
+  Date: 2026-03-30 | 2026-03-30 18:00 UTC+01:00
+============================================================
+
+  Fetching props: 2026-03-30 (Batch 2)...
+    Credits: 1033 remaining events
+    8 games
+    Credits: 1030 remaining 
+    ✓ PHI @ MIA: 12 props
+    Credits: 1024 remaining 
+    ✓ BOS @ ATL: 13 props
+    ✗ Chicago Bulls @ San Antonio Spurs: 503 Server Error: Service Unavailable for url: https://api.the-odds-api.com/v4/sports/basketball_nba/events/99052db19c4b4026e439fcc94cd4f6e8/odds?apiKey=c0bab20a574208a41a6e0d930cdaf313&regions=us&markets=player_points%2Cspreads%2Ctotals&oddsFormat=american&dateFormat=iso
+    ✗ Phoenix Suns @ Memphis Grizzlies: 503 Server Error: Service Unavailable for url: https://api.the-odds-api.com/v4/sports/basketball_nba/events/7d18651bc9124e2b06c6ffbc3af06ee6/odds?apiKey=c0bab20a574208a41a6e0d930cdaf313&regions=us&markets=player_points%2Cspreads%2Ctotals&oddsFormat=american&dateFormat=iso
+    Credits: 1012 remaining 
+    ✓ MIN @ DAL: 15 props
+    Credits: 1006 remaining 
+    ✓ CLE @ UTA: 12 props
+    Credits: 1000 remaining 
+    ✓ DET @ OKC: 12 props
+    Credits: 994 remaining 
+    ✓ WAS @ LAL: 12 props
+  Total: 76 props, 8 games
+
+  Running predictions (live rolling stats)...
+  74 predictions (68 conviction + 6 leans, skipped 2)
+    Skip breakdown: 2 no_player
+
+  ✓ today.json: 101 today (8 T1, 15 T2)
+    Added: 0 | Updated: 74 | Preserved: 27
+  ✓ Daily Excel: 2026-03-30.xlsx (74 rows)
+  ✓ Git push: B2: 2026-03-30 — 74 plays
