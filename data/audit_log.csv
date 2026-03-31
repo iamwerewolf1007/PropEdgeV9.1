@@ -55,3 +55,10 @@ timestamp,batch,operation,file,rows_before,rows_after,rows_added,rows_removed,de
 2026-03-31 08:08:39,B1,BATCH_SUMMARY,,0,0,0,0,"fetched=83, added=83, graded=0, W=0, L=0, DNP=0",OK
 2026-03-31 08:08:39,B1,SAVE_TODAY,today.json,208,291,83,0,,OK
 2026-03-31 08:08:41,B1,DAILY_EXCEL_SAVED,,0,0,0,0,/Users/salman/Documents/GitHub/PropEdgeV9.1/daily/2026-03-31.xlsx,OK
+2026-03-31 08:08:44,B1,BATCH_COMPLETE,,0,0,0,0,,OK
+2026-03-31 18:00:01,B2,BATCH_START,,0,0,0,0,2026-03-31,OK
+2026-03-31 18:00:15,B2,PROPS_FETCHED,,0,0,0,0,"86 props, 7 games",OK
+2026-03-31 18:00:29,B2,PREDICTIONS,,0,0,0,0,"85 plays, skipped 1: {'low_line': 0, 'no_player': 1, 'few_games': 0, 'no_L30': 0, 'few_recent': 0}",OK
+2026-03-31 18:00:29,B2,BATCH_SUMMARY,,0,0,0,0,"fetched=85, added=2, graded=0, W=0, L=0, DNP=0",OK
+2026-03-31 18:00:29,B2,SAVE_TODAY,today.json,291,293,2,0,,OK
+2026-03-31 18:00:29,B2,DAILY_EXCEL_SAVED,,0,0,0,0,/Users/salman/Documents/GitHub/PropEdgeV9.1/daily/2026-03-31.xlsx,OK
