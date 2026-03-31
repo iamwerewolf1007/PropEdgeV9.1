@@ -48,3 +48,10 @@ timestamp,batch,operation,file,rows_before,rows_after,rows_added,rows_removed,de
 2026-03-31 06:06:03,B0,APPEND_GAMELOGS,nba_gamelogs_2025_26.csv,24130,24293,163,0,,OK
 2026-03-31 06:06:09,B0,BATCH_SUMMARY,,0,0,0,0,"fetched=0, added=0, graded=90, W=48, L=42, DNP=11",OK
 2026-03-31 06:06:50,B0,CROSSCHECK_PASSED,,0,0,0,0,2026-03-30,OK
+2026-03-31 07:12:36,B0,BATCH_COMPLETE,,0,0,0,0,,OK
+2026-03-31 08:07:37,B1,BATCH_START,,0,0,0,0,2026-03-31,OK
+2026-03-31 08:07:43,B1,PROPS_FETCHED,,0,0,0,0,"84 props, 7 games",OK
+2026-03-31 08:08:38,B1,PREDICTIONS,,0,0,0,0,"83 plays, skipped 1: {'low_line': 0, 'no_player': 1, 'few_games': 0, 'no_L30': 0, 'few_recent': 0}",OK
+2026-03-31 08:08:39,B1,BATCH_SUMMARY,,0,0,0,0,"fetched=83, added=83, graded=0, W=0, L=0, DNP=0",OK
+2026-03-31 08:08:39,B1,SAVE_TODAY,today.json,208,291,83,0,,OK
+2026-03-31 08:08:41,B1,DAILY_EXCEL_SAVED,,0,0,0,0,/Users/salman/Documents/GitHub/PropEdgeV9.1/daily/2026-03-31.xlsx,OK
