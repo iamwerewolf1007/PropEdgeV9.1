@@ -62,3 +62,4 @@ timestamp,batch,operation,file,rows_before,rows_after,rows_added,rows_removed,de
 2026-03-31 18:00:29,B2,BATCH_SUMMARY,,0,0,0,0,"fetched=85, added=2, graded=0, W=0, L=0, DNP=0",OK
 2026-03-31 18:00:29,B2,SAVE_TODAY,today.json,291,293,2,0,,OK
 2026-03-31 18:00:29,B2,DAILY_EXCEL_SAVED,,0,0,0,0,/Users/salman/Documents/GitHub/PropEdgeV9.1/daily/2026-03-31.xlsx,OK
+2026-03-31 18:00:32,B2,BATCH_COMPLETE,,0,0,0,0,,OK

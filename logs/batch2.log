@@ -66,3 +66,35 @@ PropEdge V9.1 — BATCH 2: PREDICT
     Added: 0 | Updated: 74 | Preserved: 27
   ✓ Daily Excel: 2026-03-30.xlsx (74 rows)
   ✓ Git push: B2: 2026-03-30 — 74 plays
+============================================================
+PropEdge V9.1 — BATCH 2: PREDICT
+  Date: 2026-03-31 | 2026-03-31 18:00 UTC+01:00
+============================================================
+
+  Fetching props: 2026-03-31 (Batch 2)...
+    Credits: 19598 remaining events
+    7 games
+    Credits: 19595 remaining 
+    ✓ PHX @ ORL: 12 props
+    Credits: 19592 remaining 
+    ✓ CHA @ BKN: 13 props
+    Credits: 19589 remaining 
+    ✓ DAL @ MIL: 11 props
+    Credits: 19580 remaining 
+    ✓ TOR @ DET: 13 props
+    Credits: 19574 remaining 
+    ✓ NYK @ HOU: 13 props
+    Credits: 19571 remaining 
+    ✓ CLE @ LAL: 12 props
+    Credits: 19562 remaining 
+    ✓ POR @ LAC: 12 props
+  Total: 86 props, 7 games
+
+  Running predictions (live rolling stats)...
+  85 predictions (79 conviction + 6 leans, skipped 1)
+    Skip breakdown: 1 no_player
+
+  ✓ today.json: 85 today (6 T1, 18 T2)
+    Added: 2 | Updated: 83 | Preserved: 0
+  ✓ Daily Excel: 2026-03-31.xlsx (85 rows)
+  ✓ Git push: B2: 2026-03-31 — 85 plays
