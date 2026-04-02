@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 PropEdge V9.1 — Master Runner
-  python3 run.py 0           # Grade (6 AM UK)
+  python3 run.py 0           # Grade (7:30 AM UK)
   python3 run.py 1           # Early lines (8 AM UK)
   python3 run.py 2           # Main run (6 PM UK)
   python3 run.py 3           # Pre-tip (dynamic or 10 PM UK)
@@ -107,7 +107,7 @@ fi
     os.chmod(wrapper, 0o755)
 
     schedules = [
-        ('grade',  'batch0_grade.py', '',  6,  0),
+        ('grade',  'batch0_grade.py', '',  7,  30),
         ('batch1', 'batch_predict.py', '1', 8,  0),
         ('batch2', 'batch_predict.py', '2', 18, 0),
         ('batch3', 'batch3_dynamic.sh', '', 21, 30),
