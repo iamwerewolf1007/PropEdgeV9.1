@@ -139,3 +139,10 @@ timestamp,batch,operation,file,rows_before,rows_after,rows_added,rows_removed,de
 2026-04-03 18:00:36,B2,BATCH_SUMMARY,,0,0,0,0,"fetched=103, added=2, graded=0, W=0, L=0, DNP=0",OK
 2026-04-03 18:00:36,B2,SAVE_TODAY,today.json,593,595,2,0,,OK
 2026-04-03 18:00:37,B2,DAILY_EXCEL_SAVED,,0,0,0,0,/Users/salman/Documents/GitHub/PropEdgeV9.1/daily/2026-04-03.xlsx,OK
+2026-04-03 18:00:39,B2,BATCH_COMPLETE,,0,0,0,0,,OK
+2026-04-03 22:15:33,B3,BATCH_START,,0,0,0,0,2026-04-03,OK
+2026-04-03 22:15:41,B3,PROPS_FETCHED,,0,0,0,0,"106 props, 9 games",OK
+2026-04-03 22:15:55,B3,PREDICTIONS,,0,0,0,0,"105 plays, skipped 1: {'low_line': 0, 'no_player': 1, 'few_games': 0, 'no_L30': 0, 'few_recent': 0}",OK
+2026-04-03 22:15:55,B3,BATCH_SUMMARY,,0,0,0,0,"fetched=105, added=4, graded=0, W=0, L=0, DNP=0",OK
+2026-04-03 22:15:55,B3,SAVE_TODAY,today.json,595,599,4,0,,OK
+2026-04-03 22:15:56,B3,DAILY_EXCEL_SAVED,,0,0,0,0,/Users/salman/Documents/GitHub/PropEdgeV9.1/daily/2026-04-03.xlsx,OK

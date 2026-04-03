@@ -163,3 +163,39 @@ PropEdge V9.1 — BATCH 2: PREDICT
     Added: 2 | Updated: 83 | Preserved: 0
   ✓ Daily Excel: 2026-04-02.xlsx (85 rows)
   ✓ Git push: B2: 2026-04-02 — 85 plays
+============================================================
+PropEdge V9.1 — BATCH 2: PREDICT
+  Date: 2026-04-03 | 2026-04-03 18:00 UTC+01:00
+============================================================
+
+  Fetching props: 2026-04-03 (Batch 2)...
+    Credits: 18916 remaining events
+    9 games
+    Credits: 18871 remaining 
+    ✓ IND @ CHA: 13 props
+    Credits: 18862 remaining 
+    ✓ MIN @ PHI: 13 props
+    Credits: 18853 remaining 
+    ✓ ATL @ BKN: 12 props
+    Credits: 18841 remaining 
+    ✓ CHI @ NYK: 11 props
+    Credits: 18838 remaining 
+    ✓ BOS @ MIL: 11 props
+    Credits: 18826 remaining 
+    ✓ UTA @ HOU: 10 props
+    Credits: 18823 remaining 
+    ✓ TOR @ MEM: 10 props
+    Credits: 18820 remaining 
+    ✓ ORL @ DAL: 12 props
+    Credits: 18817 remaining 
+    ✓ NOP @ SAC: 12 props
+  Total: 104 props, 9 games
+
+  Running predictions (live rolling stats)...
+  103 predictions (95 conviction + 8 leans, skipped 1)
+    Skip breakdown: 1 no_player
+
+  ✓ today.json: 103 today (4 T1, 12 T2)
+    Added: 2 | Updated: 101 | Preserved: 0
+  ✓ Daily Excel: 2026-04-03.xlsx (103 rows)
+  ✓ Git push: B2: 2026-04-03 — 103 plays
