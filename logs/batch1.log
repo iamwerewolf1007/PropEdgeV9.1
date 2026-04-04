@@ -201,3 +201,27 @@ PropEdge V9.1 — BATCH 1: PREDICT
     Added: 101 | Updated: 0 | Preserved: 0
   ✓ Daily Excel: 2026-04-03.xlsx (101 rows)
   ✓ Git push: B1: 2026-04-03 — 101 plays
+============================================================
+PropEdge V9.1 — BATCH 1: PREDICT
+  Date: 2026-04-04 | 2026-04-04 08:14 UTC+01:00
+============================================================
+
+  Fetching props: 2026-04-04 (Batch 1)...
+    Credits: 18595 remaining events
+    3 games
+    Credits: 18589 remaining 
+    ✓ SAS @ DEN: 14 props
+    Credits: 18577 remaining 
+    ✓ WAS @ MIA: 12 props
+    Credits: 18565 remaining 
+    ✓ DET @ PHI: 13 props
+  Total: 39 props, 3 games
+
+  Running predictions (live rolling stats)...
+  37 predictions (36 conviction + 1 leans, skipped 2)
+    Skip breakdown: 2 no_player
+
+  ✓ today.json: 37 today (1 T1, 8 T2)
+    Added: 37 | Updated: 0 | Preserved: 0
+  ✓ Daily Excel: 2026-04-04.xlsx (37 rows)
+  ✓ Git push: B1: 2026-04-04 — 37 plays
