@@ -153,3 +153,29 @@ PropEdge V9.1 — BATCH 0: GRADE + UPDATE
     In-sample accuracy: 66.9%
   ✓ Git push: B0: grade 2026-04-02
   ✓ BATCH 0 complete
+============================================================
+PropEdge V9.1 — BATCH 0: GRADE + UPDATE
+  2026-04-04 07:56 UTC+01:00
+============================================================
+  Grading: 2026-04-03
+
+  Fetching box scores: 2026-04-03...
+    9 games
+  Fetched 202 logs
+  ✓ Game logs: 24783 → 24985 (+202)
+  ✓ Graded 101 plays: 52W/49L, 6 DNP
+  ✓ Daily Excel graded: 2026-04-03.xlsx
+  ✓ Cross-check: all rolling stats consistent for 2026-04-03
+  Rebuilding H2H...
+  ✓ H2H: 15608 pairs → h2h_database.csv
+  Retraining model...
+    Building training data (vectorised rolling)...
+    Rows: 50,837  Players: 634
+    Training rows after filters: 44,770
+    Training samples: 44,770
+    GBR: 237 trees (early stop from max 300)
+    ✓ Model → projection_model.pkl
+    ✓ Trust: 551 players → player_trust.json
+    In-sample accuracy: 67.1%
+  ✓ Git push: B0: grade 2026-04-03
+  ✓ BATCH 0 complete
