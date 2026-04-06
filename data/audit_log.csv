@@ -186,3 +186,7 @@ timestamp,batch,operation,file,rows_before,rows_after,rows_added,rows_removed,de
 2026-04-06 08:32:22,B1,BATCH_SUMMARY,,0,0,0,0,"fetched=60, added=60, graded=0, W=0, L=0, DNP=0",OK
 2026-04-06 08:32:22,B1,SAVE_TODAY,today.json,767,827,60,0,,OK
 2026-04-06 08:32:23,B1,DAILY_EXCEL_SAVED,,0,0,0,0,/Users/salman/Documents/GitHub/PropEdgeV9.1/daily/2026-04-06.xlsx,OK
+2026-04-06 08:32:25,B1,BATCH_COMPLETE,,0,0,0,0,,OK
+2026-04-06 08:34:18,B0,APPEND_GAMELOGS,nba_gamelogs_2025_26.csv,25052,25264,212,0,,OK
+2026-04-06 08:34:34,B0,BATCH_SUMMARY,,0,0,0,0,"fetched=0, added=0, graded=107, W=53, L=54, DNP=24",OK
+2026-04-06 08:37:00,B0,CROSSCHECK_PASSED,,0,0,0,0,2026-04-05,OK
