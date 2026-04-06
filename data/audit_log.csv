@@ -175,3 +175,14 @@ timestamp,batch,operation,file,rows_before,rows_after,rows_added,rows_removed,de
 2026-04-05 09:33:38,B1,SAVE_TODAY,today.json,636,767,131,0,,OK
 2026-04-05 09:33:39,B1,DAILY_EXCEL_SAVED,,0,0,0,0,/Users/salman/Documents/GitHub/PropEdgeV9.1/daily/2026-04-05.xlsx,OK
 2026-04-05 09:34:28,B1,BATCH_COMPLETE,,0,0,0,0,,OK
+2026-04-05 10:39:52,B0,BATCH_COMPLETE,,0,0,0,0,,OK
+2026-04-05 18:00:02,B2,BATCH_START,,0,0,0,0,2026-04-05,OK
+2026-04-06 07:59:29,B0,BATCH_START,,0,0,0,0,,OK
+2026-04-06 07:59:46,B0,BOXSCORES_FETCHED,,0,0,0,0,212 logs for 2026-04-05,OK
+2026-04-06 07:59:58,B0,FILE_STATE:BEFORE_APPEND,nba_gamelogs_2025_26.csv,25052,0,0,0,33054.5KB,OK
+2026-04-06 08:00:10,B1,BATCH_START,,0,0,0,0,2026-04-06,OK
+2026-04-06 08:00:19,B1,PROPS_FETCHED,,0,0,0,0,"60 props, 5 games",OK
+2026-04-06 08:32:19,B1,PREDICTIONS,,0,0,0,0,"60 plays, skipped 0: {'low_line': 0, 'no_player': 0, 'few_games': 0, 'no_L30': 0, 'few_recent': 0}",OK
+2026-04-06 08:32:22,B1,BATCH_SUMMARY,,0,0,0,0,"fetched=60, added=60, graded=0, W=0, L=0, DNP=0",OK
+2026-04-06 08:32:22,B1,SAVE_TODAY,today.json,767,827,60,0,,OK
+2026-04-06 08:32:23,B1,DAILY_EXCEL_SAVED,,0,0,0,0,/Users/salman/Documents/GitHub/PropEdgeV9.1/daily/2026-04-06.xlsx,OK
